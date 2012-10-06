@@ -8,12 +8,15 @@ define(function(require) {
   var Doc = require('models/doc');
   var settings = require('models/settings');
 
+  var remoteStorageDocuments = require('remotestorage-documents');
+
+  remoteStorage.claimAccess('documents', 'rw');
 
   var Docs = Backbone.Collection.extend({
 
     model: Doc,
 
-    localStorage: new Store('docsCollection'),
+    localStorage: remoteStorageDocuments.getBackboneStore('notes'),
 
     initialize: function(models) {
 
@@ -70,8 +73,19 @@ define(function(require) {
     }
 
   });
+  
+  var docs = new Docs();
 
+  var hasConnected = false;
 
-  return new Docs();
+  remoteStorage.onWidget('state', function(state) {
+    if((! hasConnected) && state == 'connected') {
+      hasConnected = true;
+
+      docs.reset(docs.localStorage.findAll());
+    }
+  })
+
+  return docs;
 
 });
