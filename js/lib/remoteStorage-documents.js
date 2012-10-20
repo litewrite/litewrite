@@ -88,7 +88,6 @@ define(function(require) {
 
       function storeObject(model) {
         if(! model.id || (typeof(model.id) === 'number')) {
-          console.log("SET ID");
           model.set(model.idAttribute, getUuid());
         }
 
@@ -106,22 +105,18 @@ define(function(require) {
       return {
 
         create: function() {
-          console.log('CREATE', arguments);
           return storeObject.apply(this, arguments);
         },
 
         update: function() {
-          console.log('UPDATE', arguments);
           return storeObject.apply(this, arguments);
         },
 
         find: function(model) {
-          console.log('FIND', arguments);
           return getById(model.id);
         },
 
         findAll: function() {
-          console.log('FIND ALL', arguments);
           var ids = myBaseClient.getListing(absPath(''));
           models = [];
           for(var i=0;i<ids.length;i++) {
@@ -131,7 +126,6 @@ define(function(require) {
         },
 
         destroy: function(model) {
-          console.log('DESTROY', arguments);
           return myBaseClient.remove(absPath(model.id));
         }
 
@@ -153,8 +147,15 @@ define(function(require) {
       exports: {
         getPrivateList: getPrivateList,
         getBackboneStore: getBackboneStore,
-        // for debugging:
-        client: myBaseClient
+        onChange: function(listName, callback) {
+          myBaseClient.on('change', function(event) {
+            var md = event.relativePath.match(new RegExp('^' + listName + '/(.+)$'));
+            if(md) {
+              event.id = md[1];
+              callback(event);
+            }
+          });
+        }
       }
     };
   });

@@ -94,6 +94,7 @@ define(function(require) {
 
   var hasConnected = false;
 
+  // TODO: remove this once event handler below is implemented.
   remoteStorage.onWidget('state', function(state) {
     if ((! hasConnected) && state == 'connected') {
       hasConnected = true;
@@ -104,6 +105,9 @@ define(function(require) {
     }
   });
 
+  remoteStorage.documents.onChange('notes', function(event) {
+    // TODO: apply update to docs collection
+  });
 
   return docs;
 
