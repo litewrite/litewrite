@@ -2,11 +2,7 @@ define(function(require) {
 
   var remoteStorageDocuments = require('remotestorage-documents');
 
-
-  remoteStorage.claimAccess('documents', 'rw');
-
   var documents = remoteStorageDocuments.getPrivateList('notes');
-
 
   function sync(method, model, options) {
     var resp;
@@ -19,7 +15,7 @@ define(function(require) {
     }
 
     if (resp) {
-      options.success(resp);
+      resp.then(options.success, options.error);
     } else {
       options.error("Record not found");
     }
@@ -31,27 +27,35 @@ define(function(require) {
   }
 
   function findAll() {
-    var ids = documents.getIds();
-    var resp = [];
-    for (var i = ids.length - 1; i >= 0; i--) {
-      resp.push(documents.get(ids[i]));
-    }
-    return resp;
+    return documents.getAll().
+      then(function(objMap) {
+        var list = [];
+        for(var key in objMap) {
+	  list.push(objMap[key]);
+        }
+        return list;
+      });
   }
 
   function create(model) {
-    model.set(model.idAttribute, documents.add(model.attributes));
-    return model;
+    return documents.add(model.attributes).
+      then(function(id) {
+        model.set(model.idAttribute, id);
+	return model;
+      });
   }
 
   function update(model) {
-    documents.set(model.id, model.attributes);
-    return model;
+    return documents.set(model.id, model.attributes).
+      then(function() {
+        return model;
+      });
   }
 
   function destroy(model) {
-    documents.setContent(model.id, '');
-    return model;
+    return documents.setContent(model.id, '').then(function() {
+      return model;
+    });
   }
 
 

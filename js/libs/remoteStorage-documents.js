@@ -35,32 +35,36 @@ define(function(require) {
       function getIds() {
         return myBaseClient.getListing(listName+'/');
       }
+      function getAll() {
+        return myBaseClient.getAll(listName + '/');
+      }
       function getContent(id) {
-        var obj = myBaseClient.getObject(listName+'/'+id);
-        if(obj) {
-          return obj.content;
-        } else {
-          return '';
-        }
+        return myBaseClient.getObject(listName+'/'+id).
+	  then(function(obj) {
+            return obj ? obj.content : '';
+          });
       }
       function getTitle(id) {
-        return getContent(id).slice(0, 50);
+        return getContent(id).then(function(content) {
+          return content.slice(0, 50);
+        });
       }
       function setContent(id, content) {
         if(content === '') {
-          myBaseClient.remove(listName+'/'+id);
+          return myBaseClient.remove(listName+'/'+id);
         } else {
-          myBaseClient.storeObject('text', listName+'/'+id, {
+          return myBaseClient.storeObject('text', listName+'/'+id, {
             content: content
           });
         }
       }
       function add(content) {
         var id = getUuid();
-        myBaseClient.storeObject('text', listName+'/'+id, {
+        return myBaseClient.storeObject('text', listName+'/'+id, {
           content: content
+        }).then(function() {
+          return id;
         });
-        return id;
       }
       function on(eventType, cb) {
         myBaseClient.on(eventType, cb);
@@ -69,18 +73,17 @@ define(function(require) {
         }
       }
       function set(id, obj) {
-        myBaseClient.storeObject('text', listName+'/'+id, obj);
+        return myBaseClient.storeObject('text', listName+'/'+id, obj);
       }
       function get(id) {
-        var obj = myBaseClient.getObject(listName+'/'+id);
-        if(obj) {
-          return obj;
-        } else {
-          return {};
-        }
+        return myBaseClient.getObject(listName+'/'+id).
+          then(function(obj) {
+            return obj || {};
+          });
       }
       return {
         getIds        : getIds,
+	getAll        : getAll,
         getContent    : getContent,
         getTitle      : getTitle,
         setContent   : setContent,

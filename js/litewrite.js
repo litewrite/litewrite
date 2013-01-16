@@ -36,8 +36,10 @@ define(function(require) {
 
     cache.loading.done(setWindowTitle, startHistory);
 
-    remoteStorage.displayWidget('remotestorage-connect');
-    remoteStorage.util.silenceAllLoggers();
+    remoteStorage.claimAccess('documents', 'rw').then(function() {
+      remoteStorage.displayWidget('remotestorage-connect');
+      remoteStorage.util.silenceAllLoggers();
+    });
 
     //Load on DOM-ready
     $(function() {
@@ -81,6 +83,7 @@ define(function(require) {
   }
 
   function fetch() {
+    console.log('fetch triggered');
     docs.trigger('fetch');
     docs.fetch({
       success: function() {
