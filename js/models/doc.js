@@ -41,10 +41,10 @@ define(function(require) {
       //Time passed since last this document was edited the last time in milliseconds
       var diff = (new Date().getTime() - this.get('lastEdited'));
       //The older the document the smaller the opacity
-      //but the opacity is allway between 0.1 and 1
+      //but the opacity is allway between 0.3 and 1
       //For documents older than 2 Weeks the opacity won't change anymore
       var limit = 14 * 86400000;
-      var opacity = diff > limit ? 0.1 : Math.round( (0.1 + ((limit - diff) / limit) * 0.9) * 100 ) / 100;
+      var opacity = diff > limit ? 0.3 : Math.round( (0.3 + ((limit - diff) / limit) * 0.7) * 100 ) / 100;
       return opacity;
     }
 
