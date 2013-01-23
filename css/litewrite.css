@@ -13,7 +13,6 @@ html, body {
 	font:normal 1.7em/150% 'Alegreya',Georgia,serif;
 	outline:none; overflow:auto; border:none; resize:none;
 }
-.editor:first-line { font-size:2em; line-height:2.4em; font-weight:bold; }
 [contenteditable]:empty::after { content:attr(data-placeholder); color:#ccc; font-size:2em; line-height:2.4em; }
 
 
@@ -62,7 +61,6 @@ footer a { display:inline; padding:0; }
 /* Smartphones (portrait and landscape) ----------- */
 @media (max-width:720px) {
 	.editor { padding:15% 5% 5% 0; margin:0 0 0 5%; width:95%; font-size:20px; }
-	.editor:first-line { font-size:28px; line-height:36px; }
 	aside { opacity: 1; font-size:24px; width:100%; background:#fcfcfc url(../img/lightpaperfibers.png) repeat; right: 100%; -webkit-transition: 0.3s right ease; }
 	aside.visible { right: 0; }
 	.add { padding:4px 1.2em; margin-top:50px; }
