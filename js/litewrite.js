@@ -28,17 +28,17 @@ define(function(require) {
           remoteStorage.setBearerToken(md[1]);
         }
       }, 0);
-        
+
     });
 
     settings
       .on('change:openDocId', setOpenDoc)
       .on('change:openDocId', setWindowTitle)
-      .on('change:openDocId', setUrl)
+      .on('change:openDocId', router.setUrl, router)
       .on('change:openDocId', docs.deleteEmpty, docs);
 
     docs
-      .on('change:title', setUrl)
+      .on('change:title', router.setUrl, router)
       .on('change:title', setWindowTitle)
       .on('add', updateOpenDocId);
 
@@ -87,9 +87,6 @@ define(function(require) {
     Backbone.history.start();
   }
 
-  function setUrl() {
-    router.navigate(cache.openDoc.get('url'));
-  }
 
   function fetch() {
     console.log('fetch triggered');
