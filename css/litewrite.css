@@ -121,9 +121,8 @@ footer a { display:inline; padding:0; }
 
 
 @media print {
-	.aside, .menu-button, #remotestorage-connect {
+	.entries, .menu-button, footer, #remotestorage-connect {
 		display:none;
-		opacity:0;
 	}
 
 	body, .editor {
