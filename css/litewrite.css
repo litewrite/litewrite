@@ -21,6 +21,8 @@ only screen and (min-device-pixel-ratio:1.5) {
 }
 [contenteditable]:empty::after { content:attr(data-placeholder); color:#ccc; }
 
+img {margin-right: 10px;}
+
 
 aside {
 	-moz-box-sizing:border-box; -webkit-box-sizing:border-box; -ms-box-sizing:border-box; box-sizing:border-box;

@@ -31,11 +31,19 @@ define(function(require) {
     },
 
     events: {
-      'keyup': 'updateOpenDoc'
+      'keyup': 'updateOpenDoc',
+      'click img': 'toggleAlignment'
     },
 
     updateOpenDoc: function() {
       cache.openDoc.set( 'content', this.$el.html() );
+    },
+
+    toggleAlignment: function() {
+      $('img').toggle(
+        function(){$(this).attr('align','left');},
+        function(){$(this).attr('align','bottom');}
+      );
     }
 
   });
