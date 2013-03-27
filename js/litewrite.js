@@ -23,7 +23,11 @@ define(function(require) {
     remoteStorage.claimAccess('documents', 'rw').then(function() {
       remoteStorage.displayWidget('remotestorage-connect');
 
-      remoteStorageDocuments.onChange('notes', fetch);
+      remoteStorageDocuments.onChange('notes', function(event) {
+        if(event.origin !== 'window') {
+          fetch();
+        }
+      });
 
       setTimeout(function() {
         var md = origHash.match(/access_token=([^&]+)/);
