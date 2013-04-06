@@ -107,8 +107,16 @@ define(function(require) {
         "item documents/notes/projects": "used by docrastinate for the 'projects' pane",
         "item documents/notes/personal": "used by docrastinate for the 'personal' pane"
       },
+
       exports: {
+        init: function() {
+          myBaseClient.release('');
+          //publicClient.release('');
+          myBaseClient.use('notes/');
+        },
+
         getPrivateList: getPrivateList,
+
         onChange: function(listName, callback) {
           myBaseClient.on('change', function(event) {
             var md = event.relativePath.match(new RegExp('^' + listName + '/(.+)$'));
