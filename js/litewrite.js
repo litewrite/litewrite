@@ -62,6 +62,7 @@ define(function(require) {
     //Load on DOM-ready
     $(function() {
       new AppView();
+      new FastClick(document.body);
     });
 
   }

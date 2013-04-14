@@ -14,6 +14,6 @@ require.config( {
   baseUrl: 'js'
 });
 
-require(['litewrite', 'utils/customizations'], function(litewrite) {
+require(['litewrite', 'utils/customizations', 'libs/fastclick'], function(litewrite) {
   litewrite();
 });
