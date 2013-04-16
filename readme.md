@@ -18,9 +18,7 @@ Run `grunt build`. But keep attention because it overwrites the existing files.
 
 ## Thanks
 
-Inspired by [iA Writer](http://iawriter.com) & [LightWrite](http://gun.io/w). Initial prototype built on [Notes](http://nv.github.com/notes).
-
-[Alegreya](http://www.huertatipografica.com.ar/tipografias/alegreya/ejemplos.html) typeface by Juan Pablo del Peral, [light paper fibers](http://subtlepatterns.com/?p=1311) background by Jorge Fuentes.
+Inspired by [iA Writer](http://iawriter.com) & [LightWrite](http://gun.io/w). Initial prototype built on [Notes](http://nv.github.com/notes). [Alegreya](http://www.huertatipografica.com.ar/tipografias/alegreya/ejemplos.html) typeface by Juan Pablo del Peral
 
 
 ## Remotestorage

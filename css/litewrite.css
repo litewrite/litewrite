@@ -1,7 +1,7 @@
 html, body {
 	position:absolute; height:100%; width:100%; margin:0; padding:0; overflow:hidden;
 	color:#000;
-	background:#fcfcfc url(../img/lightpaperfibers.png) repeat;
+	background:#fcfcfc url(../img/noise.png) repeat;
 }
 
 @font-face { font-family:'Alegreya'; font-weight:normal; src:url(Alegreya-Regular.ttf); }
@@ -82,7 +82,7 @@ footer a { display:inline; padding:0; }
 		.visible .editor { left:85%; opacity:.2; }
 
 	aside {
-		opacity:1; font-size:24px; width:85%; background:#fcfcfc url(../img/lightpaperfibers.png) repeat; right:100%;
+		opacity:1; font-size:24px; width:85%; background:#fcfcfc url(../img/noise.png) repeat; right:100%;
 		-webkit-transition:0.3s right ease; -moz-transition:0.3s right ease; transition:0.3s right ease;
 	}
 		.visible aside { right:15%; }
