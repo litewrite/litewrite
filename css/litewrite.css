@@ -1,5 +1,5 @@
 html, body {
-	position:absolute; height:100%; width:100%; margin:0; padding:0; overflow:hidden;
+	margin:0; padding:0; overflow: hidden;
 	color:#000;
 	background:#fcfcfc url(../img/noise.png) repeat;
 }
@@ -7,11 +7,12 @@ html, body {
 @font-face { font-family:'Alegreya'; font-weight:normal; src:url(Alegreya-Regular.ttf); }
 @font-face { font-family:'Alegreya'; font-weight:bold; src:url(Alegreya-Bold.ttf); }
 
+body>.scrollbox{width:84%; position: fixed;}
 .editor {
 	-moz-box-sizing:border-box; -webkit-box-sizing:border-box; -ms-box-sizing:border-box; box-sizing:border-box;
-	position:absolute; width:84%; height:100%; padding:3.5% 20% 20% 4%; margin:0 0 0 16%;
+	position: absolute; padding:3.5% 20% 20% 4%; margin: 0; width: 100%;
 	font:normal 28px/150% 'Alegreya',Georgia,serif;
-	outline:none; overflow:auto; border:none; resize:none;
+	outline:none; overflow:auto; border:none;
 	-webkit-overflow-scrolling:touch; /* enable native smooth scrolling on iOS */
 	word-wrap:break-word; /* prevent scrolling for long words or links without whitespace */
 	-webkit-tap-highlight-color:rgba(0,0,0,0); /* prevent grey flash when clicking */
@@ -19,6 +20,7 @@ html, body {
 [contenteditable]:empty::after { content:attr(data-placeholder); color:#ccc; }
 
 
+aside>.scrollbox{width:100%; margin:0;}
 aside {
 	-moz-box-sizing:border-box; -webkit-box-sizing:border-box; -ms-box-sizing:border-box; box-sizing:border-box;
 	position:fixed; width:16%; min-width:135px; height:100%;
@@ -37,7 +39,7 @@ aside a, .add {
 	white-space:nowrap; overflow:hidden;
 }
 
-.add { position:relative; display:inline-block; font-weight:normal; color:#999; width:80%; padding:1.5em 1.2em; }
+.add { position:relative; font-weight:normal; color:#999; padding:1.5em 1.2em; }
 .add:hover, .add:focus { color:#000; }
 	.add .add-plus, .add .add-text { position:absolute; -webkit-transition:opacity 200ms; -moz-transition:opacity 200ms; -o-transition:opacity 200ms; transition:opacity 200ms; }
 	.add .add-plus { opacity:1; font-size:160%; top:.51em; } .add:hover .add-plus { opacity:0; }
@@ -74,12 +76,16 @@ footer a { display:inline; padding:0; }
 }
 /* Smartphones (portrait and landscape) ----------- */
 @media (max-width:720px) {
-	.editor {
-		padding:50px 14px; margin:0; width:100%; font-size:20px;
-		left:0;
+	body>.scrollbox{
+		position: absolute; width:100%; margin: 0;
+		overflow-x: hidden;
+		left: 0;
 		-webkit-transition:all .3s ease; -moz-transition:all .3s ease; transition:all .3s ease;
 	}
-		.visible .editor { left:85%; opacity:.2; }
+	.editor {
+		top: 50px; padding: 0 14px 50px; font-size:20px;
+	}
+		.visible>.scrollbox { position: fixed; left: 85%; opacity:.2; }
 
 	aside {
 		opacity:1; font-size:24px; width:85%; background:#fcfcfc url(../img/noise.png) repeat; right:100%;
@@ -98,22 +104,19 @@ footer a { display:inline; padding:0; }
 	}
 
 	.menu-button {
-		position:relative; display:block; padding:14px; cursor:pointer; font-weight:bold; font-size:22px;
+		position:absolute; display:block; padding:14px; cursor:pointer; font-weight:bold; font-size:22px;
 		left:0;
 		-webkit-transition:all .3s ease; -moz-transition:all .3s ease; transition:all .3s ease;
 	}
 		.visible .menu-button {
-			left:85%;
 			/* expand clickable area to cover document side, prevent selecting of document when in menu */
-			padding-bottom:150%; padding-right:30px;
-			opacity:.2;
+			padding-bottom:150%; padding-right:30%;
+			z-index: 1;
 		}
 
 	#remotestorage-connect {
-		position:relative; right:-10px; top:-2px;
-		-webkit-transition:0.3s right ease; -moz-transition:0.3s right ease; transition:0.3s right ease;
+		position:relative; right:1px; top:-2px;
 	}
-		.visible #remotestorage-connect { right:-100%; }
 
 	footer { display:none; }
 }
@@ -128,6 +131,8 @@ footer a { display:inline; padding:0; }
  *  Only works in browsers supporting background-attachment:local; & CSS gradients
  *  Degrades gracefully */
 .scrollbox {
+	margin:0 0 0 16%; height:100%;
+	-webkit-overflow-scrolling:touch;
 	overflow:auto;
 	background-color:transparent;
 	background:

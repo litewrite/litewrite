@@ -10,8 +10,11 @@
 	<link rel="apple-touch-icon-precomposed" href="img/litewrite-touch.png">
 </head>
 <body>
-	<div id="remotestorage-connect"></div>
-	<div id="editor" data-placeholder="Write …" class="editor scrollbox" contenteditable></div>
+	<div class="scrollbox">
+		<div id="menu-button" class="menu-button">☰</div>
+		<div id="remotestorage-connect"></div>
+		<div id="editor" data-placeholder="Write …" class="editor" contenteditable></div>
+	</div>
 	<aside id="aside">
 		<ul id="entries" class="entries scrollbox"></ul>
 
@@ -19,7 +22,6 @@
 			write lite, <a href="http://github.com/litewrite/litewrite" target="_blank">open source</a>
 		</footer>
 	</aside>
-	<div id="menu-button" class="menu-button">☰</div>
 	<script src="js/libs/require.js" data-main="js/main"></script>
 </body>
 </html>
