@@ -28,6 +28,8 @@ body>.scrollbox{width:84%; position: fixed;}
 }
 [contenteditable]:empty::after { content:attr(data-placeholder); color:#ccc; }
 
+img {margin-right: 10px;}
+
 
 aside>.scrollbox{width:100%; margin:0;}
 aside {
