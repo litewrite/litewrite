@@ -1,0 +1,7 @@
+<% _.each(docs, function(doc) { %>
+  <li class="item" data-id="<%= doc.id %>">
+    <a href="#!<%= doc.uri %>" style="opacity: <%= doc.opacity %>">
+      <%= doc.title || 'Write ...' %>
+    </a>
+  </li>
+<% }); %>

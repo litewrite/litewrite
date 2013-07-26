@@ -18,7 +18,10 @@ html, body {
 body>.scrollbox{width:84%; position: fixed;}
 .editor {
 	-moz-box-sizing:border-box; -webkit-box-sizing:border-box; -ms-box-sizing:border-box; box-sizing:border-box;
-	position: absolute; padding:3.5% 20% 20% 4%; margin: 0; width: 100%;
+	position: absolute;
+	width: 96%;
+	margin: 3.5% 0 20% 4%; /* make sure cursor is not hidden in very top left corner */
+	padding: 0 20% 0 0;
 	min-height: 100%;
 	font:normal 28px/150% 'Alegreya',Georgia,serif;
 	outline:none; overflow:auto; border:none;
@@ -35,24 +38,32 @@ aside {
 	position:fixed; width:16%; min-width:135px; height:100%;
 	font:16px FreeSans,Helvetica,sans-serif;
 	opacity:0; -webkit-transition:opacity 300ms; -moz-transition:opacity 300ms; -o-transition:opacity 300ms; transition:opacity 300ms;
-	overflow:hidden; /* prevent scrolling, done in .entries */
+	overflow:auto;
 	-moz-user-select:none; -webkit-user-select:none; -ms-user-select:none;
 	-webkit-tap-highlight-color:rgba(0,0,0,0); /* prevent grey flash when clicking */
 }
-aside:hover, aside:focus, .visible aside { opacity:1; }
+aside:hover, aside:focus, .show-aside aside { opacity:1; }
 
 #search {
-	position: absolute;
-	z-index: 100;
-	width: 92%;
-	font-size: 16px;
-	padding: 8px 5px 5px 10px;
-	margin: 10px 10px 0px 7px;
-	background: rgba(255,255,255,.8);
-	border: 1px solid #999;
-	border-radius: 25px;
-	outline: none;
+  display: block;
+  z-index: 100;
+  width: 92%;
+  font-size: 16px;
+  padding: 8px 5px 5px 10px;
+  margin: 10px 10px 10px 7px;
+  background: rgba(255,255,255,.8);
+  border: 1px solid #999;
+  border-radius: 25px;
+  outline: none;
+  height: 33px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
+
+#search.hide { height: 0; padding: 0; margin: 0; border: 0; }
 
 aside a, .add {
 	display:block; cursor:pointer; outline:none;
@@ -60,40 +71,46 @@ aside a, .add {
 	white-space:nowrap; overflow:hidden;
 }
 
-.add { position:relative; font-weight:normal; color:#999; padding:1.5em 1.2em; }
+.add {
+	position: relative;
+	font-weight: normal;
+	color: #999;
+	padding: 6px 18px;
+	font-weight: bold;
+}
 .add:hover, .add:focus { color:#000; }
-	.add .add-plus, .add .add-text { position:absolute; -webkit-transition:opacity 200ms; -moz-transition:opacity 200ms; -o-transition:opacity 200ms; transition:opacity 200ms; }
-	.add .add-plus { opacity:1; font-size:160%; top:.51em; } .add:hover .add-plus { opacity:0; }
-	.add .add-text { opacity:0; font-weight:bold; color:#000; } .add:hover .add-text { opacity:1; }
 
 .entries {
-	height:100%; display:block;
+	height:auto; display:block;
 	margin:0;
 	padding:0;
-	padding-top: 35px;
-	overflow: hidden; /* prevent horizontal scrolling */
+	padding-top: 7px;
 	-webkit-overflow-scrolling:touch; /* enable native smooth scrolling on iOS */
 	list-style:none;
-}
-.entries:hover, .entries:focus {
-	overflow-y: auto; /* show scrollbar only on hover */
 }
 .entries a {
 	text-overflow:ellipsis; height:1.35em; padding:.5em 0 .5em 1.2em;
 	-webkit-tap-highlight-color:rgba(0,0,0,0); /* prevent grey flash when clicking */
 }
-.entries a:hover, .entries a:focus, .entries .selected { color:#000; font-weight:bold; }
-.entries .item:last-child a { margin-bottom:50px; } /* whitespace to not overlap with the credits when scrolled down */
+.entries a:hover, .entries a:focus, .entries .selected {
+	color: #000;
+}
+.entries .selected {
+	font-weight: bold;
+}
 
-footer { position:absolute; bottom:0; padding:1em 2em; font-size:.7em; white-space:nowrap; opacity:.7; }
+.entries li:last-child {
+	margin-bottom: 50px; /* some space after the last document in the list */
+}
+
+
+footer { position:fixed; bottom:0; padding:1em 2em; font-size:.7em; white-space:nowrap; opacity:.7; }
 footer a { display:inline; padding:0; }
 
 
-#remotestorage-connect {
-	position: fixed;
-	top: 0;
-	right: 15px;
-	z-index: 1;
+#remotestorage-widget {
+  top: 0 !important;
+	right: 3px !important;
 }
 
 
@@ -124,25 +141,22 @@ footer a { display:inline; padding:0; }
 	.editor {
 		top: 50px; padding: 0 14px 50px; font-size:20px;
 	}
-		.visible>.scrollbox { position: fixed; left: 85%; opacity:.2; }
+		.show-aside>.scrollbox { position: fixed; left: 85%; opacity:.2; }
 
 	aside {
 		opacity:1; font-size:24px; width:85%; background:#fcfcfc url(../img/noise.png) repeat; right:100%;
 		-webkit-transition:0.3s right ease; -moz-transition:0.3s right ease; transition:0.3s right ease;
 	}
-		.visible aside { right:15%; }
+		.show-aside aside { right:15%; }
 
 	.add { padding:4px .5em; }
-		.add-plus, .add-text { opacity:1 !important; position:relative !important; }
-		.add-plus:active, .add-text:active { opacity:1 !important; }
-		.add-plus { top:0 !important; }
 
 	.entries {
 		overflow-y: auto; /* always show scrollbar on mobile to prevent scroll issues */
 	}
 	.entries a { padding:10px 0 10px 14px; }
 	.entries a:hover, .entries a:focus {
-		font-weight:normal; /* prevent bold-flickering when scrolling on mobile */
+		color: initial; /* prevent flickering when scrolling on mobile */
 	}
 
 	.menu-button {
@@ -150,22 +164,18 @@ footer a { display:inline; padding:0; }
 		left:0;
 		-webkit-transition:all .3s ease; -moz-transition:all .3s ease; transition:all .3s ease;
 	}
-		.visible .menu-button {
+		.show-aside .menu-button {
 			/* expand clickable area to cover document side, prevent selecting of document when in menu */
 			padding-bottom:150%; padding-right:30%;
 			z-index: 1;
 		}
-
-	#remotestorage-connect {
-		position:relative; right:0; top:-5px;
-	}
 
 	footer { display:none; }
 }
 
 
 @media print {
-	.entries, .menu-button, footer, #remotestorage-connect {
+	.entries, .menu-button, footer, #remotestorage-widget {
 		display:none;
 	}
 
