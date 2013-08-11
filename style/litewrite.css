@@ -133,21 +133,40 @@ footer a { display:inline; padding:0; }
 /* keep in sync with value in utils.js */
 @media (max-width:1024px) {
 	body>.scrollbox{
-		position: absolute; width:100%; margin: 0;
+		width:100%;
+    margin: 0;
 		overflow-x: hidden;
-		left: 0;
-		-webkit-transition:all .3s ease; -moz-transition:all .3s ease; transition:all .3s ease;
 	}
+  #snap-content {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: 2;
+    overflow: auto;
+    background:#fcfcfc url(../img/noise.png) repeat;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translate3d(0, 0, 0);
+       -moz-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+         -o-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
 	.editor {
 		top: 50px; padding: 0 14px 50px; font-size:20px;
 	}
-		.show-aside>.scrollbox { position: fixed; left: 100%; opacity:.2; }
 
 	aside {
-		opacity:1; font-size:24px; width:85%; background:#fcfcfc url(../img/noise.png) repeat; right:100%;
-		-webkit-transition:0.3s right ease; -moz-transition:0.3s right ease; transition:0.3s right ease;
+		opacity:1; font-size:24px; background:#fcfcfc url(../img/noise.png) repeat;
+    position: absolute;
+    top: 0; bottom: 0;
+    /* TODO: find good width here */
+    width: 265px;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transition: width 0.3s ease;
+       -moz-transition: width 0.3s ease;
+        -ms-transition: width 0.3s ease;
+         -o-transition: width 0.3s ease;
+            transition: width 0.3s ease;
 	}
-		.show-aside aside { right:15%; }
 
 	.add { padding:4px .5em; }
 
@@ -164,11 +183,6 @@ footer a { display:inline; padding:0; }
 		left:0;
 		-webkit-transition:all .3s ease; -moz-transition:all .3s ease; transition:all .3s ease;
 	}
-		.show-aside .menu-button {
-			/* expand clickable area to cover document side, prevent selecting of document when in menu */
-			padding-bottom:150%; padding-right:30%;
-			z-index: 1;
-		}
 
 	footer { display:none; }
 }

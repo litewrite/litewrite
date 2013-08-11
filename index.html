@@ -10,7 +10,7 @@
 	<link rel="apple-touch-icon-precomposed" href="img/litewrite-touch.png">
 </head>
 <body>
-	<div class="scrollbox">
+	<div id="snap-content" class="scrollbox">
 		<div id="menu-button" class="menu-button">
 			<!-- menu button as svg to make sure it runs everywhere -->
 			<svg height="15" width="15">
@@ -20,15 +20,15 @@
 		<div id="remotestorage-connect"></div>
 		<div id="editor" data-placeholder="Write …" class="editor" contenteditable></div>
 	</div>
-	<aside id="aside">
-		<input type="search" id="search" class="hide" placeholder="Search …" value="">
-		<div id="add" class="add">+</div>
-		<ul id="entries" class="entries scrollbox"></ul>
+  <aside id="aside">
+    <input type="search" id="search" class="hide" placeholder="Search …" value="">
+    <div id="add" class="add">+</div>
+    <ul id="entries" class="entries scrollbox"></ul>
 
-		<footer id="credits">
-			write lite, <a href="http://github.com/litewrite/litewrite" target="_blank">open source</a>
-		</footer>
-	</aside>
+    <footer id="credits">
+      write lite, <a href="http://github.com/litewrite/litewrite" target="_blank">open source</a>
+    </footer>
+  </aside>
 	<script src="lib/require.js" data-main="src/config"></script>
 </body>
 </html>

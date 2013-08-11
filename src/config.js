@@ -11,7 +11,8 @@ require.config( {
     localstorage: '../lib/backbone.localstorage',
     remotestorage: '../lib/remotestorage',
     'remotestorage-documents': '../lib/remotestorage-documents',
-    'rs-adapter': '../lib/backbone.remoteStorage-documents'
+    'rs-adapter': '../lib/backbone.remoteStorage-documents',
+    snap: '../lib/snap'
   },
   baseUrl: 'src',
   shim: {

@@ -28,7 +28,7 @@ define(function(require) {
 
       this.editor.on('modKey', this.aside.hide);
 
-      this.entries.on('open', this.aside.toggle);
+      this.entries.on('open', this.aside.hide);
 
     },
 
@@ -41,7 +41,7 @@ define(function(require) {
     },
 
     newDoc: function() {
-      if (utils.isMobile) this.aside.toggle();
+      if (utils.isMobile) this.aside.hide();
       if (! this.app.doc.isEmpty()) this.collection.addNew();
       this.editor.focus();
       return false;
@@ -49,7 +49,6 @@ define(function(require) {
 
     toggleAside: function() {
       this.aside.toggle();
-      return false;
     },
 
     // global key handler for shortcuts
