@@ -245,6 +245,17 @@ footer a {
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
+.share {
+  position: fixed;
+  right: 7px;
+  top: 50px;
+  background: #FF00EB;
+  border: none;
+  color: white;
+  border-radius: 2px;
+  font-size: 15px;
+}
+
 
 /* Smartphones (portrait and landscape) ----------- */
 
