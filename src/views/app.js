@@ -6,6 +6,7 @@ define(function(require) {
   var DateView = require('views/date');
   var AsideView = require('views/aside');
   var SearchView = require('views/search');
+  var PlaceholderView = require('views/placeholder');
   var utils = require('utils');
 
 
@@ -15,8 +16,6 @@ define(function(require) {
 
     initialize: function(options) {
 
-      _.bindAll(this, 'togglePlaceholder');
-
       this.app = options.app;
 
       this.editor = new EditorView({ app: this.app });
@@ -24,6 +23,7 @@ define(function(require) {
       this.entries = new EntriesView({ app: this.app, collection: this.collection });
       this.search = new SearchView({ model: this.app.state, collection: this.collection });
       this.aside = new AsideView({ app: this.app, collection: this.collection });
+      this.placeholder = new PlaceholderView({ model: this.app.doc });
 
 
       this.search
@@ -36,9 +36,6 @@ define(function(require) {
       this.entries
         .on('open', this.aside.hide)
         .on('scroll', this.editor.desktopFocus);
-
-      this.$placeholder = $('.editor-placeholder');
-      this.app.doc.on('change:title', this.togglePlaceholder);
 
     },
 
@@ -90,14 +87,6 @@ define(function(require) {
     next: function() {
       var doc = this.collection.after(this.app.doc.id);
       if (doc) this.app.open(doc);
-    },
-
-    togglePlaceholder: function() {
-      if (this.app.doc.isEmpty()) {
-        this.$placeholder.removeClass('hide');
-      } else {
-        this.$placeholder.addClass('hide');
-      }
     }
 
   });
