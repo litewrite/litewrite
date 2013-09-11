@@ -4,6 +4,7 @@ define(function(require) {
   var Backbone = require('backbone');
   var remoteStorageDocuments = require('remotestorage-documents');
   var remoteStorage = require('remotestorage');
+  var template = require('text!templates/share.html');
 
 
   var ShareView = Backbone.View.extend({
@@ -11,10 +12,12 @@ define(function(require) {
     el: '#share',
 
     initialize: function() {
-      _.bindAll(this, 'setLink');
+      _.bindAll(this, 'setLink', 'updatePublic');
       this.remote = remoteStorageDocuments.publicList('notes');
+      this.template = _.template(template);
       this.model.on('change:public', this.setLink);
       this.$button = this.$('button');
+      this.collection.on('sync', this.updatePublic);
     },
 
     events: {
@@ -29,10 +32,9 @@ define(function(require) {
     },
 
     share: function() {
-      var content = this.model.get('content');
-      this.remote.addRaw('text/html', content).then(_.bind(function(path) {
+      var html = this.renderDocument(this.model);
+      this.remote.addRaw('text/html', html).then(_.bind(function(url) {
         remoteStorage.sync().then(_.bind(function() {
-          var url = this.remote.getItemURL(path);
           this.model.set('public', url);
         }, this));
       }, this));
@@ -43,6 +45,23 @@ define(function(require) {
       if (!link) return this.$button.text('share');
       this.$el.attr('href', this.model.get('public'));
       this.$button.text('open');
+    },
+
+    updatePublic: function(doc) {
+      if (!doc.get('public')) return;
+      var id = doc.get('public').match(/.+\/(.+?)$/)[1];
+      var html = this.renderDocument(doc);
+      console.log('store',  id);
+      this.remote.setRaw(id, 'text/html', html).then(function() {
+        console.log('sync');
+        remoteStorage.sync().then(function(){console.log('synced');},function(){console.log('syncing failed');});
+      }, function(){console.log('fail',arguments);});
+    },
+
+    renderDocument: function(doc) {
+      var data = doc.toJSON();
+      data.date = new Date(data.lastEdited).toDateString();
+      return this.template(data);
     }
 
   });
