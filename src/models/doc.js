@@ -11,7 +11,8 @@ define(function(require) {
     defaults: {
       title: '',
       content: '',
-      lastEdited: null
+      lastEdited: null,
+      public: null
     },
 
     sync: rsSync,

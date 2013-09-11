@@ -26,6 +26,7 @@ define(function(require) {
 
       this.doc
         .on('change:content', this.doc.updateLastEdited)
+        .on('change:public', this.doc.updateLastEdited)
         .on('change:content', this.doc.updateTitle)
         .on('change:id', this.handlePrevious)
         .on('change:title', this.setWindowTitle)

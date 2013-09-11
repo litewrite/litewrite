@@ -7,6 +7,7 @@ define(function(require) {
   var AsideView = require('views/aside');
   var SearchView = require('views/search');
   var PlaceholderView = require('views/placeholder');
+  var ShareView = require('views/share');
   var utils = require('utils');
 
 
@@ -24,6 +25,7 @@ define(function(require) {
       this.search = new SearchView({ model: this.app.state, collection: this.collection });
       this.aside = new AsideView({ app: this.app, collection: this.collection });
       this.placeholder = new PlaceholderView({ model: this.app.doc });
+      this.share = new ShareView({ model: this.app.doc });
 
 
       this.search
