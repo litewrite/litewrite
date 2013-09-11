@@ -246,7 +246,7 @@ footer a {
 }
 
 .share {
-  position: fixed;
+  position: absolute;
   right: 7px;
   top: 50px;
   background: #FF00EB;
