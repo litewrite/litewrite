@@ -18,7 +18,7 @@ define(function(require) {
 
     initialize: function() {
 
-      _.bindAll(this, 'loadDoc', 'open', 'debouncedOpen', 'updateDoc', 'handlePrevious', 'updateDocs');
+      _.bindAll(this, 'loadDoc', 'open', 'debouncedOpen', 'updateDoc', 'handlePrevious', 'updateDocs', 'triggerConnected', 'triggerDisconnected');
 
       this.state = new State();
       this.doc = new Doc();
@@ -44,6 +44,9 @@ define(function(require) {
       window.remoteStorage = remoteStorage;
 
       remoteStorage.displayWidget('remotestorage-connect');
+
+      remoteStorage.on('ready', this.triggerConnected);
+      remoteStorage.on('disconnected', this.triggerDisconnected);
 
     },
 
@@ -79,6 +82,14 @@ define(function(require) {
 
     updateDocs: function(doc) {
       this.docs.set( doc.toJSON(), { add: false, remove: false } );
+    },
+
+    triggerConnected: function() {
+      this.trigger('connected');
+    },
+
+    triggerDisconnected: function() {
+      this.trigger('disconnected');
     },
 
     setWindowTitle: function(doc) {

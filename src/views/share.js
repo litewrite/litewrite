@@ -11,13 +11,21 @@ define(function(require) {
 
     el: '#share',
 
-    initialize: function() {
-      _.bindAll(this, 'setLink', 'updatePublic');
+    initialize: function(options) {
+
+      _.bindAll(this, 'setLink', 'updatePublic', 'show', 'hide');
+
       this.remote = remoteStorageDocuments.publicList('notes');
+
       this.template = _.template(template);
-      this.model.on('change:public', this.setLink);
+
       this.$button = this.$('button');
+
+      this.model.on('change:public', this.setLink);
       this.collection.on('sync', this.updatePublic);
+      options.app.on('connected', this.show);
+      options.app.on('disconnected', this.hide);
+
     },
 
     events: {
@@ -58,6 +66,14 @@ define(function(require) {
       var data = doc.toJSON();
       data.date = new Date(data.lastEdited).toDateString();
       return this.template(data);
+    },
+
+    show: function() {
+      this.$el.removeClass('share-hide');
+    },
+
+    hide: function() {
+      this.$el.addClass('share-hide');
     }
 
   });

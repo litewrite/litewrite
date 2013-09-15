@@ -25,7 +25,7 @@ define(function(require) {
       this.search = new SearchView({ model: this.app.state, collection: this.collection });
       this.aside = new AsideView({ app: this.app, collection: this.collection });
       this.placeholder = new PlaceholderView({ model: this.app.doc });
-      this.share = new ShareView({ model: this.app.doc , collection: this.collection });
+      this.share = new ShareView({ model: this.app.doc , collection: this.collection, app: this.app });
 
 
       this.search
