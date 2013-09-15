@@ -51,11 +51,7 @@ define(function(require) {
       if (!doc.get('public')) return;
       var id = doc.get('public').match(/.+\/(.+?)$/)[1];
       var html = this.renderDocument(doc);
-      console.log('store',  id);
-      this.remote.setRaw(id, 'text/html', html).then(function() {
-        console.log('sync');
-        remoteStorage.sync().then(function(){console.log('synced');},function(){console.log('syncing failed');});
-      }, function(){console.log('fail',arguments);});
+      this.remote.setRaw(id, 'text/html', html);
     },
 
     renderDocument: function(doc) {
