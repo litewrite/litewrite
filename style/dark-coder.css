@@ -1,0 +1,45 @@
+@import url("litewrite.css");
+
+@font-face {
+    font-family:'DroidSansMono';
+    src:url(DroidSansMono.ttf);
+}
+
+html, body {
+    color:#fcfcfc;
+    background:#0a0a0a url(../img/noise.png) repeat;
+}
+
+.editor {
+    font: normal 16px/150% 'DroidSansMono', Georgia, serif;
+}
+
+.editor-placeholder {
+    font: normal 16px/150% 'DroidSansMono', Georgia, serif;
+}
+
+.date {
+    opacity: .4;
+}
+
+aside a, .add {
+    color: #66b;
+}
+
+.add {
+    color: #55a;
+}
+
+.add:hover, .add:focus {
+    color:#fff;
+}
+
+.entries a:hover, .entries a:focus, .entries .selected {
+    color: #fff;
+}
+
+.entries .selected {
+    font-weight: bold;
+    color: #fff;
+}
+
