@@ -7,7 +7,6 @@ html, body {
 	font:16px FreeSans, Helvetica, sans-serif;
 }
 
-
 @font-face {
   font-family: 'Alegreya';
   font-weight: normal;
@@ -20,11 +19,10 @@ html, body {
   src: url(Alegreya-Bold.ttf);
 }
 
-/* for cyrillic text */
 @font-face {
-  font-family: 'Gregor';
-  font-weight: normal;
-  src: url(Gregor-Regular.otf);
+  font-family:'Gregor';
+  font-weight:normal;
+  src:url(Gregor-Regular.otf);
 }
 
 .scrollbox {
@@ -58,10 +56,6 @@ body > .scrollbox {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -ms-box-sizing: border-box;
-}
-
-#editor.cyrillic {
-  font-family: 'Gregor', Georgia, serif;
 }
 
 #date {

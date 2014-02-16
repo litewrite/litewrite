@@ -27,7 +27,24 @@ define(function(require) {
 
   utils.modKey = utils.isMac ? { name: 'ctrlKey', code: 17 } : { name: 'altKey', code: 18 };
 
+  utils.getStyle = function (oElm, strCssRule){
+      var strValue = "";
+      if(document.defaultView && document.defaultView.getComputedStyle){
+          strValue = document.defaultView.getComputedStyle(oElm, "").getPropertyValue(strCssRule);
+      }
+      else if(oElm.currentStyle){
+          strCssRule = strCssRule.replace(/\-(\w)/g, function (strMatch, p1){
+              return p1.toUpperCase();
+          });
+          strValue = oElm.currentStyle[strCssRule];
+      }
+      return strValue;
+  }
 
+  utils.l10n_ranges = [
+      // see http://kourge.net/projects/regexp-unicode-block)
+      {range: "[\u0400-\u04FF\u0500-\u052F]", font: "Gregor"},
+  ]
 
   return utils;
 });

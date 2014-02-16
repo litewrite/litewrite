@@ -21,7 +21,7 @@ define(function(require) {
       this.app.on('ready', this.desktopFocus);
       this.app.doc.on('change:id', this.render);
       this.app.doc.on('update', this.render);
-
+      this.app.doc.on('change:content', this.detect_l10n, this);
       this.$el.autosize();
     },
 
@@ -33,7 +33,6 @@ define(function(require) {
       // this is just for migration from contenteditable to textarea.
       // we can remove this later on.
       content = content.replace(/<br>/ig,'\n').replace(/<[^>]+>/ig,'');
-      this.handleCyrillic(content);
       this.$el.val(content || '').trigger('autosize.resize');
     },
 
@@ -50,6 +49,24 @@ define(function(require) {
       this.$el.blur();
     },
 
+    detect_l10n: function() {
+      var content = this.app.doc.attributes.content
+      for (var i=0;i<(utils.l10n_ranges.length);i++) {
+          var item = utils.l10n_ranges[i]
+          if (content.match(item['range']) != null) {
+              this.prependFont(item['font'])
+          }
+      }
+      return false;
+    },
+
+    prependFont: function (fontName) {
+      var fontFamily = utils.getStyle(this.el,'font-family')
+      if (fontFamily.match(fontName) == null) {
+        this.el.style.fontFamily = fontName + ", " + fontFamily;
+      }
+    },
+
     events: {
       'keyup': 'updateOpenDoc'
     },
@@ -57,12 +74,6 @@ define(function(require) {
     updateOpenDoc: function(e) {
       if ( e.which === (utils.modKey.code) ) return this.trigger('modKey');
       this.app.doc.set( 'content', this.$el.val() );
-    },
-
-    handleCyrillic: function(content) {
-      // see http://kourge.net/projects/regexp-unicode-block
-      var isCyrillic = content.match('[\u0400-\u04FF\u0500-\u052F]');
-      isCyrillic ? this.$el.addClass('cyrillic') : this.$el.removeClass('cyrillic');
     }
 
   });
