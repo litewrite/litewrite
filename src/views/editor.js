@@ -28,10 +28,10 @@ define(function(require) {
     render: function() {
       var content = this.model.get('content');
       if ( content === this.$el.val() ) return;
-      // strip html tags from documents.
+      // strip html tags from documents and convert & sign.
       // this is just for migration from contenteditable to textarea.
       // we can remove this later on.
-      content = content.replace(/<br>/ig,'\n').replace(/<[^>]+>/ig,'');
+      content = content.replace(/<br>/ig,'\n').replace(/<[^>]+>/ig,'').replace(/&amp;/ig,'&');
       this.$el.val(content || '').trigger('autosize.resize');
     },
 
