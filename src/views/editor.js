@@ -31,7 +31,7 @@ define(function(require) {
       // strip html tags from documents and convert & sign.
       // this is just for migration from contenteditable to textarea.
       // we can remove this later on.
-      content = content.replace(/<br>/ig,'\n').replace(/<\/div>/ig,'\n').replace(/<[^>]+>/ig,'').replace(/&amp;/ig,'&');
+      content = content.replace(/<br>/ig,'\n').replace(/<\/div><div>/ig,'\n').replace(/<[^>]+>/ig,'').replace(/\&amp;/ig,'&');
       this.$el.val(content || '').trigger('autosize.resize');
     },
 
