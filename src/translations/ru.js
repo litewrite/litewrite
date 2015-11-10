@@ -6,24 +6,25 @@ function plural(word, num) {
 module.exports = {
   emptyDoc: 'Пишите …',
   search:   'Искать …',
-  footer:   'пишите с легкостью. код открыт',
+  footer:   'Пишите с легкостью! Исходный код открыт.',
   share:    'Поделиться',
   open:     'открыть',
-  modified: 'изменен',
+  modified: 'изменён',
   welcome:  require('./welcome-ru.txt'),
-  timeAgo: function relativeTimeWithPlural(number, key) {
+  timeAgo: function (number, key) {
       var format = {
+          'ss': 'секунду_секунды_секунд',
           'mm': 'минуту_минуты_минут',
           'hh': 'час_часа_часов',
           'dd': 'день_дня_дней',
           'MM': 'месяц_месяца_месяцев',
           'yy': 'год_года_лет'
       };
-      if (key === 'm') {
-          return 'минуту';
+      if (number === 1) {
+          return plural(format[key], +number) + ' назад';
       }
       else {
-          return number + ' ' + plural(format[key], +number);
+          return number + ' ' + plural(format[key], +number) + ' назад';
       }
   }
 };

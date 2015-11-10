@@ -1,3 +1,8 @@
+function plural(word, num) {
+  var forms = word.split('_');
+  return num  === 1 ? forms[0] : forms[1];
+}
+
 module.exports = {
   emptyDoc: 'Schreibe etwas …',
   search:   'Suchen …',
@@ -6,16 +11,20 @@ module.exports = {
   open:     'öffnen',
   modified: 'zuletzt bearbeitet',
   welcome:  require('./welcome-de.txt'),
-  secondAgo:   function ()  { return 'vor einer Sekunde'      ; },
-  secondsAgo:  function (x) { return 'vor ' + x + ' Sekunden' ; },
-  minuteAgo:   function ()  { return 'vor einer Minute'       ; },
-  minutesAgo:  function (x) { return 'vor ' + x + ' Minuten'  ; },
-  hourAgo:     function ()  { return 'vor einer Stunde'       ; },
-  hoursAgo:    function (x) { return 'vor ' + x + ' Stunden'  ; },
-  dayAgo:      function ()  { return 'vor einem Tag'          ; },
-  daysAgo:     function (x) { return 'vor ' + x + ' Tagen'    ; },
-  monthAgo:    function ()  { return 'vor einem Monat'        ; },
-  monthsAgo:   function (x) { return 'vor ' + x + ' Monaten'  ; },
-  yearAgo:     function ()  { return 'vor einem Jahr'         ; },
-  yearsAgo:    function (x) { return 'vor ' + x + ' Jahren'   ; }
+  timeAgo: function relativeTimeWithPlural(number, key) {
+      var format = {
+          'ss': 'einer Sekunde_Sekunden',
+          'mm': 'einer Minute_Minuten',
+          'hh': 'einer Stunde_Stunden',
+          'dd': 'einer Tag_Tagen',
+          'MM': 'einer Monat_Monaten',
+          'yy': 'einer Jahr_Jahren'
+      };
+      if (number === 1) {
+          return 'vor ' + plural(format[key], +number);
+      }
+      else {
+          return 'vor ' + number + ' ' + plural(format[key], +number);
+      }
+  }
 };
