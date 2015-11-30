@@ -59,8 +59,7 @@ utils.handleAppcacheUpdates = function () {
   if (!appcache) return
   appcache.addEventListener('updateready', function (e) {
     if (appcache.status !== appcache.UPDATEREADY) return
-    var msg = 'A new version of Litewrite is available. Load it?'
-    if (!window.confirm(msg)) return
+    if (!window.confirm(translations.updateCache)) return
     window.location.reload()
   }, false)
 }
