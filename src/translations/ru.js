@@ -5,6 +5,7 @@ module.exports = {
   share: 'Поделиться',
   open: 'открыть',
   modified: 'изменён',
+  updateCache: 'A new version of Litewrite is available. Load it?',
   welcome: require('./welcome-ru.txt'),
   secondsAgo: function (x) {
     if (x === 1) return 'a second ago'

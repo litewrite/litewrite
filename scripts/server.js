@@ -1,8 +1,15 @@
 const express = require('express')
 const path = require('path')
+const fs = require('fs')
 
 const app = express()
 const port = process.env.PORT || 8000
+
+function serveFile (relativePath) {
+  return function (req, res) {
+    res.sendFile(path.join(__dirname, '..', relativePath))
+  }
+}
 
 if (process.env.NODE_ENV !== 'production') {
   const webpack = require('webpack')
@@ -16,17 +23,22 @@ if (process.env.NODE_ENV !== 'production') {
   }))
 
   app.use(webpackHotMiddleware(compiler))
-} else {
-  app.get('/litewrite.js', function (req, res) {
-    res.sendFile(path.join(__dirname, '../litewrite.js'))
+
+  app.get('/', function (req, res) {
+    fs.readFile(path.join(__dirname, '../index.html'), 'utf8', function (err, file) {
+      if (err) res.send(500)
+      var withoutManifest = file.replace('<html manifest="cache.manifest">', '<html>')
+      res.send(withoutManifest)
+    })
   })
+} else {
+  app.get('/', serveFile('index.html'))
+  app.get('/litewrite.min.js', serveFile('litewrite.min.js'))
 }
 
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, '../index.html'))
-})
 app.use('/img', express.static(path.join(__dirname, '../img')))
 app.use('/style', express.static(path.join(__dirname, '../style')))
+app.get('/cache.manifest', serveFile('cache.manifest'))
 
 if (require.main === module) {
   app.listen(port, function (error) {

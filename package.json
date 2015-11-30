@@ -12,9 +12,10 @@
   },
   "scripts": {
     "start": "node scripts/server.js",
-    "build": "NODE_ENV=production webpack --config scripts/webpack.config.js",
+    "build": "NODE_ENV=production webpack --config scripts/webpack.config.js && npm run cache",
     "test": "npm run lint",
     "lint": "standard",
+    "cache": "echo \"$(sed \"2s/.*/# `date +'%Y-%m-%d %T'`/\" cache.manifest)\" > cache.manifest",
     "production": "npm run build && NODE_ENV=production npm start"
   },
   "dependencies": {
