@@ -34,7 +34,7 @@ _.extend(Litewrite.prototype, Backbone.Events, {
     this.app = new AppView({ litewrite: this, model: this.doc, collection: this.docs })
 
     if (window.cordova) {
-        remoteStorage.setCordovaRedirectUri('https://khertan.net')
+        remoteStorage.setCordovaRedirectUri('https://khertan.net/')
     }
     remoteStorage.displayWidget('remotestorage-connect')
 
