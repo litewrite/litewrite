@@ -6,7 +6,7 @@ module.exports = {
   open: 'ouvrir',
   modified: 'dernière modification',
   updateCache: 'Une nouvelle version de Litewrite est disponible. La charger maintenant ?',
-  welcome: require('./welcome-fr.txt'),
+  welcome: (window.cordova) ? require('./welcome-cordova-fr.txt') : require('./welcome-fr.txt'),
   secondsAgo: function (x) {
     if (x === 1) return 'il y a une seconde'
     return 'il y a ' + x + ' secondes'
