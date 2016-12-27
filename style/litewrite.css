@@ -1,30 +1,12 @@
 html, body {
 	margin: 0;
-  padding: 0;
-  overflow: hidden;
-	color: #000;
-	background: #fcfcfc url(../img/noise.png) repeat;
-	font:16px FreeSans, Helvetica, sans-serif;
-}
-
-
-@font-face {
-  font-family: 'Alegreya';
-  font-weight: normal;
-  src: url(Alegreya-Regular.ttf);
-}
-
-@font-face {
-  font-family: 'Alegreya';
-  font-weight: bold;
-  src: url(Alegreya-Bold.ttf);
-}
-
-/* for cyrillic text */
-@font-face {
-  font-family: 'Gregor';
-  font-weight: normal;
-  src: url(Gregor-Regular.otf);
+	padding: 0;
+	overflow: hidden;
+	color: #212121;
+	background-color: #fcfcfc;
+	font: 16px 'Open Sans', Frutiger, Calibri, Roboto, 'Myriad Pro', Myriad, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .scrollbox {
@@ -36,33 +18,31 @@ html, body {
 }
 
 body > .scrollbox {
-  width: 84%;
-  position: fixed;
+	width: 84%;
+	position: fixed;
 }
 
 #editor {
-  position: relative;
-  width: 96%;
-  margin: 3.5% 0 0 4%; /* make sure cursor is not hidden in very top left corner */
-  padding: 0 20% 8% 0;
-  min-height: 84%;
-  font: normal 24px/150% 'Alegreya', Georgia, serif;
-  outline: none;
-  overflow: auto;
-  border: none;
-  background: transparent;  /* firefox mobile has a gradient otherwise */
-  -webkit-overflow-scrolling: touch; /* enable native smooth scrolling on iOS */
-  word-wrap: break-word; /* prevent scrolling for long words or links without whitespace */
-  -webkit-tap-highlight-color: rgba(0,0,0,0); /* prevent grey flash when clicking */
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
+	position: relative;
+	width: 96%;
+	margin: 3.5% 0 0 4%; /* make sure cursor is not hidden in very top left corner */
+	padding: 0 20% 8% 0;
+	min-height: 84%;
+	font: normal 20px/150% 'Open Sans', Frutiger, Calibri, Roboto, 'Myriad Pro', Myriad, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	outline: none;
+	overflow: auto;
+	border: none;
+	background: transparent;  /* firefox mobile has a gradient otherwise */
+	-webkit-overflow-scrolling: touch; /* enable native smooth scrolling on iOS */
+	word-wrap: break-word; /* prevent scrolling for long words or links without whitespace */
+	-webkit-tap-highlight-color: rgba(0,0,0,0); /* prevent grey flash when clicking */
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
 	resize: none;
-}
-
-#editor.cyrillic {
-  font-family: 'Gregor', Georgia, serif;
 }
 
 #date {
